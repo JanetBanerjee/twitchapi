@@ -1,0 +1,30 @@
+<%#= app/views/pages/indexx.html.erb %>
+
+<% follows = Post.find(51) %>
+
+<% follows.follows.each do |i| %>
+    <% p = @client.get_streams({user_id: i}).data %>
+    <% j = p.as_json %>
+      <% if j[0].nil? %>
+
+        <% else %>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">
+            <%= j[0]['title'] %>
+          </h3>
+        </div>
+      </div>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">
+            <% k = j[0]['thumbnail_url']%>
+            <% p = k.sub!("{width}x{height}", "400x225") %>
+            <img src=<%= p %>>
+          </h3>
+        </div>
+      </div>
+        <% end %>
+<% end %>
+
+
